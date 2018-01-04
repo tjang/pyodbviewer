@@ -42,3 +42,8 @@ pyodbsql2 -q 'lat@hdr,lon@hdr,varno@body,vertco_reference[1]@body,initial_obsval
 2)	with -n option
 pyodbsql2 -q 'lat@hdr,lon@hdr,varno@body,vertco_reference[1]@body,initial_obsvalue@body, obsvalue@body, bgvalue@body, fg_depar@body' -n 10 -i ECMA.Aircraft.odb
   </pre>
+
+pyodbsql view :
+
+![screenshot](/../screenshot/odbqueryview.png)
+
