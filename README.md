@@ -22,9 +22,11 @@ PandasDataFrameGUI : https://github.com/bluenote10/PandasDataFrameGUI
 1. Matplotlib
 
 ### Basic Usage
+
 #### pyodbsql
 <code> pyodbsql -q [sql_query] -t [table_name] -n [output line number] -i [odb(-1)file]
   * -t, -n : optional
+</code>
 <pre>
 1. pyodbsql -q 'select date, time, ident, lat, lon, ops_obstype,  varno, initial_obsvalue, obsvalue, corvalue, bgvalue from hdr, body, conv where ops_obstype=10101' -i /[path]/odb/surface
 2. pyodbsql -t body -i /[path]/ECMA.Aircraft
