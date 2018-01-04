@@ -137,11 +137,6 @@ def main():
 
 
 if __name__ == "__main__":
-#   parser = argparse.ArgumentParser()
-#   parser.add_argument("-q, --query", help="odb query, example : select date, time from hdr", action="store_true")
-#   parser.add_argument("-i, --ifile", help="odb file, /s2/home/../glm_odb/surface", action="store_true")
-#   parser.add_argument("-t, --table", help="table name in schema, example : hdr, body, sat", action="store_true")
-#   parser.add_argument("-n, --nlines", help="output line numbers", action="store_true")
-#   args = parser.parse_args()
+
 
     main()
