@@ -1,0 +1,84 @@
+#!/usr/bin/env python
+# -*- encoding: utf-8
+
+from __future__ import absolute_import, division, print_function
+
+"""
+If you are getting wx related import errors when running in a virtualenv:
+Either make sure that the virtualenv has been created using
+`virtualenv --system-site-packages venv` or manually add the wx library
+path (e.g. /usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode) to the
+python path.
+"""
+import datetime
+import pandas as pd
+import numpy as np
+import dfgui
+
+import os
+import subprocess
+import sys, getopt
+import argparse
+
+import odb
+
+
+def convert_float(val):
+    try:
+       return float(val)
+    except ValueError:
+       return np.nan
+
+def query_odb_data(query, odbfile, lineMode, rowNumber):
+    column_lists = query.split(',')
+    a = []
+    sql = "select " + query + " from '" + odbfile + "' ;"
+    print(sql)
+    if not lineMode:
+      for r in odb.sql(sql):
+        a.append(r[:])
+    else:
+      i = 0
+      for r in odb.sql(sql):
+        a.append(r[:])
+        i = i + 1
+        if i > rowNumber:
+          break
+
+
+    # pandas dataframe
+    odbdf = pd.DataFrame(data=a, columns=column_lists[0:])
+
+    return odbdf
+
+
+
+def main():
+
+    tableMode = False
+    lineMode = False
+    rowNumber = -1
+
+    opts, args = getopt.getopt(sys.argv[1:], "q:i:t:n:",["query=","ifile=","nlines="])
+
+    for opt, arg in opts:
+        if opt in ("-q", "--query"):
+           query = arg
+        elif opt in ("-i", "--ifile"):
+           odbfile = arg
+        elif opt in ("-n", "--nlines"):
+           if not arg == "":
+              lineMode = True
+              rowNumber = int(arg)
+
+    print(lineMode)
+
+    df = query_odb_data(query, odbfile, lineMode, rowNumber)
+    dfgui.show(df)
+
+
+
+
+if __name__ == "__main__":
+
+    main()
